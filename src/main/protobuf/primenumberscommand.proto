@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package com.primeserver.protobuf.primeseries;
+import "primenumbers.proto";
+
+/**
+ * Commands
+ */
+message PrimeCommand {
+  oneof command {
+    Read read = 1;
+  }
+ 
+  message Read {
+    int64 upperBound = 1;
+  }
+
+  message Response {
+    oneof response {
+      ValidationError validationError = 1;
+      SuccessfullyDone done = 2;
+      Items items = 4;
+    }
+
+    message Items {
+      repeated PrimeNumber number = 1;
+    }
+
+    message SuccessfullyDone {}
+
+    message ValidationError {
+      repeated string errors = 1;
+    }
+  }
+}

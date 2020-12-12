@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package com.primeserver.protobuf.primeseries;
+
+/**
+ * Data Model
+ */
+message PrimeNumber {
+  int64 value = 1;       // A prime number in the series
+}
