@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package com.primeserver.protobuf.primeseries;
+package com.primenumbers.server.protobuf;
 
 /**
  * Data Model
