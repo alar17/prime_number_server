@@ -30,7 +30,6 @@ public class Main {
     private static Behavior<Void> create() {
         return Behaviors.setup(context -> {
             // Setup the protocols and directives
-            Config config = ConfigFactory.load().getConfig("database");
             PrimeNumbersProtocol primeNumbersProtocol = PrimeNumbersProtocol.create(context);
             new Directives(primeNumbersProtocol, 8080);
             log.debug("Main Actor Ref:, {}", context.getSelf());

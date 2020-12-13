@@ -1,9 +1,10 @@
 val akkaV = "2.6.3"
-val akkaHttpV = "10.1.11"
+val akkaHttpV = "10.1.12"
 val reaktiveV = "0.12.1"
 
 enablePlugins(JavaAppPackaging)
 enablePlugins(ProtobufPlugin)
+enablePlugins(AkkaGrpcPlugin)
 libraryDependencies ++= Seq(
     "ch.qos.logback" % "logback-classic" % "1.2.3",
     "com.typesafe.akka" %% "akka-http" % akkaHttpV,
@@ -14,7 +15,7 @@ libraryDependencies ++= Seq(
     "com.typesafe.akka" %% "akka-actor" % akkaV,
     "com.typesafe.akka" %% "akka-remote" % akkaV, // for protobuf3 serialization
     "com.typesafe.akka" %% "akka-http-jackson" % akkaHttpV, // JSON serialization
-    "com.typesafe.akka" %% "akka-persistence-dynamodb" % "1.1.1",
+    "com.typesafe.akka" %% "akka-discovery" % akkaV,
     "io.vavr" % "vavr" % "0.9.0",
     "org.scala-lang" % "scala-library" % "2.13.1",
     "ch.qos.logback" % "logback-classic" % "1.2.3",
