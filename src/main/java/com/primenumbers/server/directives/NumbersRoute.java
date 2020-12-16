@@ -6,7 +6,6 @@ import java.util.concurrent.ExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.primenumbers.server.protobuf.Primenumberscommand.PrimeCommand.Response.Items;
 import com.primenumbers.server.series.PrimeNumbersProtocol;
 
 import akka.http.javadsl.model.HttpResponse;
@@ -28,34 +27,36 @@ public class NumbersRoute extends AllDirectives {
     }
     
     public Route numbersRoute() {
-        return path(PathMatchers.integerSegment(), number -> 
-            get(() -> {
-                log.debug("Received get request for Number: {}", number);
-                CompletionStage<Route> response = protocol.readItem(number).thenApply(r -> {
-                    switch (r.getResponseCase()) {
-                        case VALIDATIONERROR:
-                            return complete(DirectiveUtils.withValidationError(HashSet.ofAll(r.getValidationError().getErrorsList())));
-                        case ITEMS: return complete(withItems(r.getItems()));
-                        default: throw new IllegalStateException("Invalid response:" + r);
-                    }
-                });
-                try {
-                    return response.toCompletableFuture().get();
-                } catch (InterruptedException|ExecutionException e) {
-                    log.warn(e.getMessage());
-                    throw new IllegalStateException("Invalid response" + e);
-                }
-            })
-        );
+//        return path(PathMatchers.integerSegment(), number -> 
+//            get(() -> {
+//                log.debug("Received get request for Number: {}", number);
+//                CompletionStage<Route> response = protocol.readItem(number).thenApply(r -> {
+//                    switch (r.getResponseCase()) {
+//                        case VALIDATIONERROR:
+//                            return complete(DirectiveUtils.withValidationError(HashSet.ofAll(r.getValidationError().getErrorsList())));
+//                        case ITEMS: return complete(withItems(r.getItems()));
+//                        default: throw new IllegalStateException("Invalid response:" + r);
+//                    }
+//                });
+//                try {
+//                    return response.toCompletableFuture().get();
+//                } catch (InterruptedException|ExecutionException e) {
+//                    log.warn(e.getMessage());
+//                    throw new IllegalStateException("Invalid response" + e);
+//                }
+//            })
+//        );
+        
+        throw new IllegalStateException("NOT IMPLEMENTED");
     }
-    
-    /**
-     * Returns an HttpResponse including metrics as body
-     */
-    public static HttpResponse withItems(Items items) {
-        return HttpResponse.create()
-            .withStatus(StatusCodes.OK)
-            .withEntity(items.toByteArray());
-    }
+//    
+//    /**
+//     * Returns an HttpResponse including metrics as body
+//     */
+//    public static HttpResponse withItems(Items items) {
+//        return HttpResponse.create()
+//            .withStatus(StatusCodes.OK)
+//            .withEntity(items.toByteArray());
+//    }
     
 }

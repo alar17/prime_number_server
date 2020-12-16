@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "PrimeNumberServicesProto";
+option java_package = "com.primenumbers.server.grpc";
+
+package server;
+
+
+//////////////////////////////////// The greeting service definition.
+//service PrimeNumberService {
+//
+//    rpc sendPrimeNumbersStream (ReadNumbersRequest) returns (stream PrimeNumberResponse) {}
+//
+//    rpc sendPrimeNumberError (ReadNumbersRequest) returns (PrimeNumberResponse) {}
+//}
+//
+///**
+// * Response
+// */
+//message PrimeNumberResponse {
+//  int64 value = 1;       // A prime number in the series
+//}
+//
+/**
+ * Request Message
+ */
+message ReadNumbersRequest {
+  int64 upperBound = 1;
+}
+
+service PrimeNumbersService {
+  rpc sendPrimeNumbersStream (ReadNumbersRequest) returns (stream PrimeNumberResponse) {}
+
+///  rpc sendPrimeNumberError (ReadNumbersRequest) returns (PrimeNumberResponse) {}
+}
+
+/**
+ * Data Model
+ */
+message PrimeNumberResponse {
+  int64 value = 1;       // A prime number in the series
+}
+
+
+/**
+ * Commands
+ */
+message PrimeCommand {
+  oneof command {
+    Read read = 1;
+  }
+
+  message Read {
+    int64 upperBound = 1;
+  }
+}
+
+message Response {
+    oneof response {
+      ValidationError validationError = 1;
+      SuccessfullyDone done = 2;
+      Items items = 4;
+    }
+
+    message Items {
+      repeated PrimeNumberResponse number = 1;
+    }
+
+    message SuccessfullyDone {}
+
+    message ValidationError {
+      repeated string errors = 1;
+    }
+}

@@ -19,23 +19,23 @@ public class Main {
     public static void main(String[] args) {
         try {
             // Create the main ActorSystem
-            ActorSystem.create(Main.create(), "primenumbers-server");
+            //ctorSystem.create(Main.create(), "primenumbers-server");
         } catch (Exception x) {
             log.error("Server Stoped with an error: {}", x);
             System.exit(1);
         }
         log.info("prime-number-server started");
     }
-
-    private static Behavior<Void> create() {
-        return Behaviors.setup(context -> {
-            // Setup the protocols and directives
-            PrimeNumbersProtocol primeNumbersProtocol = PrimeNumbersProtocol.create(context);
-            new Directives(primeNumbersProtocol, 8080);
-            log.debug("Main Actor Ref:, {}", context.getSelf());
-            return Behaviors.receive(Void.class)
-                .onSignal(Terminated.class, sig -> Behaviors.stopped())
-                .build();
-        });
-    }
+//
+//    private static Behavior<Void> create() {
+//        return Behaviors.setup(context -> {
+//            // Setup the protocols and directives
+//            PrimeNumbersProtocol primeNumbersProtocol = PrimeNumbersProtocol.create(context);
+//            new Directives(primeNumbersProtocol, 8080);
+//            log.debug("Main Actor Ref:, {}", context.getSelf());
+//            return Behaviors.receive(Void.class)
+//                .onSignal(Terminated.class, sig -> Behaviors.stopped())
+//                .build();
+//        });
+//    }
 }
