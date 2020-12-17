@@ -26,11 +26,7 @@ message ReadNumbersRequest {
 
 message PrimeNumbersResponse {
     oneof response {
-      ValidationError validationError = 1;
+      string validationError = 1;
       int64 primeNumber = 2;
-    }
-
-    message ValidationError {
-      repeated string errors = 1;
     }
 }
