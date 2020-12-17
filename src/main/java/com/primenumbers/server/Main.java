@@ -9,7 +9,7 @@ import akka.stream.ActorMaterializer;
 import akka.stream.Materializer;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
-
+import com.primenumbers.server.actors.PrimeNumbersProtocol;
 import com.primenumbers.server.grpc.*;
 
 import java.util.concurrent.CompletionStage;
@@ -39,14 +39,15 @@ public class Main {
     }
 
     public static CompletionStage<ServerBinding> run(ActorSystem sys) throws Exception {
-        Materializer mat = ActorMaterializer.create(sys);
-
+        Materializer materializer = ActorMaterializer.create(sys);
+        PrimeNumbersProtocol protocol = new PrimeNumbersProtocol();
+        
         // Instantiate implementation
-        PrimeNumbersService impl = new PrimeNumbersServiceImpl(mat);
+        PrimeNumbersService impl = new PrimeNumbersServiceImpl(protocol, materializer);
 
         return Http.get(sys).bindAndHandleAsync(
             PrimeNumbersServiceHandlerFactory.create(impl, sys),
             ConnectHttp.toHost("127.0.0.1", 8090), 
-            mat);
+            materializer);
     }
 }

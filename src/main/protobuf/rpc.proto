@@ -21,12 +21,12 @@ service PrimeNumbersService {
  * Request to calculate a new prime number series up to the "upperbound" value
  */
 message ReadNumbersRequest {
-  int64 upperBound = 1;
+  int32 upperBound = 1;
 }
 
 message PrimeNumbersResponse {
     oneof response {
       string validationError = 1;
-      int64 primeNumber = 2;
+      int32 primeNumber = 2;
     }
 }

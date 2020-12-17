@@ -3,7 +3,7 @@ val akkaHttpV = "10.1.12"
 val reaktiveV = "0.12.1"
 val grpcV = "1.32.1"
 
-enablePlugins(JavaAppPackaging)
+////enablePlugins(JavaAppPackaging)
 ////enablePlugins(ProtobufPlugin)
 enablePlugins(AkkaGrpcPlugin)
 
@@ -13,11 +13,11 @@ libraryDependencies ++= Seq(
 //    "com.typesafe.akka" %% "akka-http-core" % akkaHttpV,
 //    "com.typesafe.akka" %% "akka-http2-support" % akkaHttpV,
 //    "com.typesafe.akka" %% "akka-stream" % akkaV,
-//    "com.typesafe.akka" %% "akka-slf4j" % akkaV,
+    "com.typesafe.akka" %% "akka-slf4j" % akkaV,
 //    "com.typesafe.akka" %% "akka-persistence-typed" % akkaV,
     "com.typesafe.akka" %% "akka-actor-typed" % akkaV,
 //    "com.typesafe.akka" %% "akka-actor" % akkaV,
-//    "com.typesafe.akka" %% "akka-remote" % akkaV, // for protobuf3 serialization
+    "com.typesafe.akka" %% "akka-remote" % akkaV, // for protobuf3 serialization
     "com.typesafe.akka" %% "akka-http-jackson" % akkaHttpV, // JSON serialization
 ///    "com.typesafe.akka" %% "akka-discovery" % akkaV,
 ///    "io.grpc" %% "grpc-core" % grpcV,
@@ -42,4 +42,5 @@ libraryDependencies ++= Seq(
 
 fork in run := true
 cancelable in Global := true
-////javaSource in ProtobufConfig := ((sourceDirectory in Compile).value / "generated")
+///javaSource in ProtobufConfig := ((sourceDirectory in Compile).value / "generated")
+akkaGrpcGeneratedLanguages := Seq(AkkaGrpc.Java)

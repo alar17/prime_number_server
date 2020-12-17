@@ -7,7 +7,7 @@ import java.util.concurrent.CompletionStage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.primenumbers.server.series.PrimeNumbersProtocol;
+import com.primenumbers.server.actors.PrimeNumbersProtocol;
 
 import akka.NotUsed;
 import akka.actor.ActorSystem;

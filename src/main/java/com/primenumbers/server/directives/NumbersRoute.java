@@ -6,7 +6,7 @@ import java.util.concurrent.ExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.primenumbers.server.series.PrimeNumbersProtocol;
+import com.primenumbers.server.actors.PrimeNumbersProtocol;
 
 import akka.http.javadsl.model.HttpResponse;
 import akka.http.javadsl.model.StatusCodes;
