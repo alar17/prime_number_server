@@ -15,9 +15,11 @@ import com.primenumbers.server.series.ReadCommand.CommandResponse;
 import akka.NotUsed;
 import akka.stream.javadsl.Source;
 
+/**
+ * The gRPC implementation of the PrimeNumberService
+ */
 public class PrimeNumbersServiceImpl implements PrimeNumbersService {
     private static final Logger log = LoggerFactory.getLogger(PrimeNumbersServiceImpl.class);
-    
     private PrimeNumbersProtocol protocol;
 
     public PrimeNumbersServiceImpl(PrimeNumbersProtocol protocol) {
