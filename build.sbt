@@ -1,6 +1,5 @@
 val akkaV = "2.5.31"
 val akkaHttpV = "10.1.12"
-val reaktiveV = "0.12.1"
 val grpcV = "1.32.1"
 
 enablePlugins(AkkaGrpcPlugin)
@@ -14,6 +13,7 @@ libraryDependencies ++= Seq(
     "io.vavr" % "vavr" % "0.9.0",
     "com.opencsv" % "opencsv" % "5.1",
     "junit" % "junit" % "4.11" % "test",
+    "com.typesafe.akka" %% "akka-stream-testkit" % akkaV % "test",
     "org.assertj" % "assertj-core" % "3.2.0" % "test",
     "org.mockito" % "mockito-core" % "2.2.27" % "test",
     "info.solidsoft.mockito" % "mockito-java8" % "2.0.0" % "test",
