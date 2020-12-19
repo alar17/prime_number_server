@@ -19,16 +19,14 @@ public class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
     
     public static void main(String[] args) {
-        // important to enable HTTP/2 in ActorSystem's config
-        Config conf = ConfigFactory.parseString("akka.http.server.preview.enable-http2 = on")
-            .withFallback(ConfigFactory.defaultApplication());
-
+        Config config = ConfigFactory.load();
+        
         // Akka ActorSystem Boot
-        ActorSystem sys = ActorSystem.create("PrimeNumberServer", conf);
+        ActorSystem sys = ActorSystem.create("PrimeNumberServer", config);
 
         try {
-            run(sys).thenAccept(binding -> {
-                log.debug("gRPC server bound to: " + binding.localAddress());
+            run(sys, config.getInt("server.port")).thenAccept(binding -> {
+                log.info("gRPC server bound to: {}", binding.localAddress());
             });
         } catch (Exception e) {
             log.error("System Error: {}", e);
@@ -40,15 +38,16 @@ public class Main {
 
     /**
      * Create singletons, bind the port and run the actor system.
+     * @param config 
      */
-    public static CompletionStage<ServerBinding> run(ActorSystem sys) throws Exception {
+    public static CompletionStage<ServerBinding> run(ActorSystem sys, int port) throws Exception {
         Materializer materializer = ActorMaterializer.create(sys);
         PrimeNumbersProtocol protocol = new PrimeNumbersProtocol();        
         PrimeNumbersService primeNumberService = new PrimeNumbersServiceImpl(protocol);
 
         return Http.get(sys).bindAndHandleAsync(
             PrimeNumbersServiceHandlerFactory.create(primeNumberService, sys),
-            ConnectHttp.toHost("127.0.0.1", 8090), 
+            ConnectHttp.toHost("127.0.0.1", port), 
             materializer);
     }
 }
