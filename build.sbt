@@ -14,13 +14,14 @@ libraryDependencies ++= Seq(
     "com.opencsv" % "opencsv" % "5.1",
     "junit" % "junit" % "4.11" % "test",
     "com.typesafe.akka" %% "akka-stream-testkit" % akkaV % "test",
+    "com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaV % "test",
     "org.assertj" % "assertj-core" % "3.2.0" % "test",
     "org.mockito" % "mockito-core" % "2.2.27" % "test",
     "info.solidsoft.mockito" % "mockito-java8" % "2.0.0" % "test",
     "com.novocode" % "junit-interface" % "0.11" % "test",
     "org.forgerock.cuppa" % "cuppa" % "1.3.1" % "test",
     "org.forgerock.cuppa" % "cuppa-junit" % "1.3.1" % "test",
-  )
+)
 
 fork in run := true
 cancelable in Global := true
