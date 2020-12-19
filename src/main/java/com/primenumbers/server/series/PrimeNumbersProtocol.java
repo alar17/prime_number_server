@@ -32,7 +32,6 @@ public class PrimeNumbersProtocol {
             this.context = context;
             // Setup the protocols and directives
             log.info("Main Actor Ref:" + context.getSelf());
-            log.info("Server started: Screening-Core on port: {}");
             return Behaviors.receive(Object.class)
                 .onSignal(Terminated.class, (c , m) -> Behaviors.stopped())
                 .build();
