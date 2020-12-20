@@ -72,13 +72,6 @@ public class PrimeNumbersProtocol {
                 // response the ask is failed with a TimeoutException
                 Duration.ofSeconds(3),
                 context.getSystem().scheduler());
-
-        result.thenAccept(res -> {
-            context.stop(actor);
-            res.getStreamSource().runForeach(n -> {
-                log.debug("[ {} ]", n.getPrimeNumber());
-            }, Materializer.matFromSystem(context.getSystem()));
-        });
         
         return result;
     }
